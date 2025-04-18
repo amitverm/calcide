@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Reaction Time Test - Calcide</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #121212;
+      color: white;
+      padding: 20px;
+    }
+    
+    .container {
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .logo-container {
+      margin-bottom: 15px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #3498db, #1abc9c);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo-icon:before {
+      content: "C";
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+    }
+    
+    .logo-icon:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 24, 1, 0.8);
+      bottom: 0;
+    }
+    
+    .logo-text {
+      font-size: 32px;
+      font-weight: bold;
+      background: linear-gradient(to right, #3498db, #1abc9c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    
+    .team-slogan {
+      font-style: italic;
+      color: #aaa;
+      margin-top: -5px;
+      font-size: 14px;
+    }
+    
+    h1 {
+      color: #ff1801;
+      margin-bottom: 10px;
+    }
+    
+    h2 {
+      color: #1abc9c;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 5px;
+    }
+    
+    .description {
+      margin-bottom: 30px;
+      color: #cccccc;
+    }
+    
+    .lights-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .light {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #333;
+      margin: 5px;
+      transition: background-color 0.2s;
+    }
+    
+    .light.red {
+      background-color: red;
+    }
+    
+    .car-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+    }
+    
+    .track {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background-color: #444;
+      border-radius: 4px;
+    }
+    
+    .car {
+      position: absolute;
+      left: 20px;
+      bottom: 40px;
+      width: 80px;
+      height: 40px;
+      background-color: #3498db;
+      border-radius: 10px;
+      transition: left 0.5s ease-out;
+    }
+    
+    .car:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      width: 50px;
+      height: 20px;
+      background-color: #3498db;
+      border-radius: 10px 10px 0 0;
+    }
+    
+    .car.launched {
+      left: calc(100% - 100px);
+    }
+    
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: #16a085;
+    }
+    
+    button:disabled {
+      background-color: #888;
+      cursor: not-allowed;
+    }
+    
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      visibility: hidden;
+    }
+    
+    .stats {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #222;
+      border-radius: 4px;
+    }
+    
+    .false-start {
+      color: red;
+      font-weight: bold;
+      animation: flash 0.5s infinite;
+    }
+    
+    .team-section {
+      margin-top: 40px;
+      text-align: left;
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #1abc9c;
+    }
+    
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .team-member {
+      width: 48%;
+      margin-bottom: 15px;
+      background-color: #333;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .team-member h4 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      color: #3498db;
+    }
+    
+    .team-member p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #ddd;
+    }
+    
+    .team-member .role {
+      font-style: italic;
+      color: #1abc9c;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .nav-button {
+      padding: 10px 15px;
+      background-color: #333;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .nav-button:hover {
+      background-color: #444;
+    }
+    
+    .section {
+      display: none;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    .sponsors-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    
+    .sponsor {
+      width: 30%;
+      margin-bottom: 20px;
+      background-color: #333;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 160px;
+    }
+    
+    .sponsor-logo {
+      width: 80px;
+      height: 80px;
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sponsor-name {
+      font-weight: bold;
+      color: #fff;
+      margin: 5px 0;
+    }
+    
+    .sponsor-type {
+      font-size: 12px;
+      color: #1abc9c;
+      margin-bottom: 8px;
+    }
+    
+    .sponsor-logo.prime {
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #333;
+    }
+    
+    .sponsor-logo.tech {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: #fff;
+    }
+    
+    .sponsor-logo.fuel {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: #fff;
+    }
+    
+    .sponsor-logo.finance {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: #fff;
+    }
+    
+    .sponsor-logo.lifestyle {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: #fff;
+    }
+    
+    .sponsor-logo.media {
+      background: linear-gradient(135deg, #f1c40f, #f39c12);
+      color: #333;
+    }
+    
+    .sponsor-description {
+      font-size: 12px;
+      color: #aaa;
+    }
+    
+    .tier-description {
+      font-size: 14px;
+      color: #ddd;
+      margin-bottom: 15px;
+      text-align: center;
+      font-style: italic;
+    }
+    
+    .tier-divider {
+      margin: 30px 0 15px 0;
+      border-top: 1px dashed #444;
+      position: relative;
+    }
+    
+    .tier-divider span {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      padding: 0 15px;
+      color: #1abc9c;
+      font-weight: bold;
+    }
+    
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    @media (max-width: 600px) {
+      .team-member, .sponsor {
+        width: 100%;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">CALCIDE</div>
+      </div>
+      <div class="team-slogan">Racing for precision</div>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="showSection('reaction-test')">Reaction Test</button>
+      <button class="nav-button" onclick="showSection('about-team')">About Team</button>
+      <button class="nav-button" onclick="showSection('sponsors')">Our Sponsors</button>
+    </div>
+
+    <div id="reaction-test" class="section active">
+      <h1>F1 Reaction Time Test</h1>
+      <p class="description">Wait for all five lights to go out, then press the Launch button as quickly as possible!</p>
+      
+      <div class="lights-container">
+        <div class="light" id="light1"></div>
+        <div class="light" id="light2"></div>
+        <div class="light" id="light3"></div>
+        <div class="light" id="light4"></div>
+        <div class="light" id="light5"></div>
+      </div>
+      
+      <div class="car-container">
+        <div class="track"></div>
+        <div class="car" id="car"></div>
+      </div>
+      
+      <button id="startButton">Start Sequence</button>
+      <button id="launchButton" disabled>LAUNCH!</button>
+      
+      <div class="result" id="result"></div>
+      
+      <div class="stats">
+        <p>Best Time: <span id="bestTime">-</span></p>
+        <p>Average Time: <span id="avgTime">-</span></p>
+        <p>Last 5 Times: <span id="lastTimes">-</span></p>
+      </div>
+    </div>
+    
+    <div id="about-team" class="section">
+      <h1>Team Calcide</h1>
+      
+      <div class="team-section">
+        <h2>About Us</h2>
+        <p>Team Calcide is a next-generation Formula 1 team focused on precision engineering and cutting-edge technology. Founded in 2023, we bring together the brightest minds in motorsport, aerodynamics, and computational design.</p>
+        <p>Our name "Calcide" represents our core philosophy: calculated decisions combined with rapid acceleration. We believe that success in F1 comes from the perfect balance of data-driven strategy and lightning-fast reflexes.</p>
+        <p>Based in Milton Keynes, UK, with technology centers in Maranello, Italy and Palo Alto, USA, our global team is united by one mission: pushing the boundaries of what's possible in motorsport.</p>
+        
+        <h2>Our Team</h2>
+        <div class="team-members">
+          <div class="team-member">
+            <h4>Elena Rodriguez</h4>
+            <p class="role">Team Principal</p>
+            <p>Former race engineer with 15 years of F1 experience. Elena leads our team with a perfect blend of technical knowledge and strategic vision.</p>
+          </div>
+          
+          <div class="team-member">
+            <h4>Marcus Chen</h4>
+            <p class="role">Lead Driver</p>
+            <p>Known for his surgical precision and remarkable consistency, Marcus has achieved 8 podium finishes in his career and holds the record for fastest reaction time at race starts.</p>
+          </div>
+          
+          <div class="team-member">
+            <h4>Sofia Blackwell</h4>
+            <p class="role">Second Driver</p>
+            <p>Rising star with exceptional wet-weather driving skills. Sofia joined Team Calcide after an impressive junior career with multiple championship wins.</p>
+          </div>
+          
+          <div class="team-member">
+            <h4>Dr. Arun Patel</h4>
+            <p class="role">Chief Technical Officer</p>
+            <p>Pioneering aerodynamicist whose computational fluid dynamics models have revolutionized F1 car design, focusing on the perfect balance of downforce and efficiency.</p>
+          </div>
+          
+          <div class="team-member">
+            <h4>Luisa Fernandez</h4>
+            <p class="role">Head of Strategy</p>
+            <p>Mathematical genius who develops our race algorithms and decision-making systems, ensuring split-second precision in our race strategy.</p>
+          </div>
+          
+          <div class="team-member">
+            <h4>James Wilson</h4>
+            <p class="role">Chief Engineer</p>
+            <p>Mechanical engineering expert specializing in power unit optimization and energy recovery systems, helping us maximize performance while maintaining reliability.</p>
+          </div>
+        </div>
+        
+        <h2>Our Technology</h2>
+        <p>At Calcide, we believe technology is the backbone of racing excellence. Our custom-built simulation systems allow drivers to practice reaction times identical to race conditions. This web-based reaction test is a simplified version of the tools our drivers use every day.</p>
+        <p>Our proprietary "NeuralDrive" system analyzes thousands of race starts to predict optimal launch timing, giving our drivers the competitive edge when those five lights go out.</p>
+        <p>We're also pioneering sustainable racing technology with our "EcoBoost" energy recovery system that has set new standards for efficiency in F1.</p>
+      </div>
+    </div>
+    
+    <div id="sponsors" class="section">
+      <h1>Our Sponsors</h1>
+      
+      <div class="team-section">
+        <h2>Partnerships for Success</h2>
+        <p>Team Calcide is proud to partner with industry-leading brands who share our commitment to innovation, precision, and sustainable performance. Our sponsors are integral to our success, providing not just financial support but technological expertise that drives us forward.</p>
+        
+        <div class="tier-description">Our Title Sponsor represents the pinnacle of our partnership network.</div>
+        
+        <div class="sponsors-grid">
+          <div class="sponsor">
+            <div class="sponsor-logo prime">QT</div>
+            <div class="sponsor-name">QuantumTech</div>
+            <div class="sponsor-type">TITLE SPONSOR</div>
+            <div class="sponsor-description">Global leader in quantum computing solutions, providing revolutionary data processing that powers our race simulations.</div>
+          </div>
+        </div>
+        
+        <div class="tier-divider"><span>PLATINUM PARTNERS</span></div>
+        <div class="tier-description">Our Platinum Partners work closely with our technical team, integrating their technologies directly into our operations.</div>
+        
+        <div class="sponsors-grid">
+          <div class="sponsor">
+            <div class="sponsor-logo tech">NX</div>
+            <div class="sponsor-name">NexusAI</div>
+            <div class="sponsor-type">AI PARTNER</div>
+            <div class="sponsor-description">Advanced machine learning systems that optimize our race strategy in real-time during every Grand Prix.</div>
+          </div>
+          
+          <div class="sponsor">
+            <div class="sponsor-logo fuel">VR</div>
+            <div class="sponsor-name">VelocityRenewables</div>
+            <div class="sponsor-type">ENERGY PARTNER</div>
+            <div class="sponsor-description">Sustainable fuel solutions that maximize performance while reducing environmental impact.</div>
+          </div>
+          
+          <div class="sponsor">
+            <div class="sponsor-logo finance">GP</div>
+            <div class="sponsor-name">GlobalPeakFinance</div>
+            <div class="sponsor-type">FINANCIAL PARTNER</div>
+            <div class="sponsor-description">Investment specialists who provide the strategic funding that fuels our technological development.</div>
+          </div>
+        </div>
+        
+        <div class="tier-divider"><span>GOLD SPONSORS</span></div>
+        <div class="tier-description">Gold level sponsors contribute essential components and services to our racing operation.</div>
+        
+        <div class="sponsors-grid">
+          <div class="sponsor">
+            <div class="sponsor-logo tech">PL</div>
+            <div class="sponsor-name">PrecisionLabs</div>
+            <div class="sponsor-type">TECHNICAL SUPPLIER</div>
+            <div class="sponsor-description">Cutting-edge sensors and telemetry systems that measure every aspect of car performance with microsecond accuracy.</div>
+          </div>
+          
+          <div class="sponsor">
+            <div class="sponsor-logo lifestyle">AM</div>
+            <div class="sponsor-name">AeroMaxx</div>
+            <div class="sponsor-type">AERODYNAMICS PARTNER</div>
+            <div class="sponsor-description">Revolutionary composite materials that combine strength with minimal weight for optimal performance.</div>
+          </div>
+          
+          <div class="sponsor">
+            <div class="sponsor-logo media">VS</div>
+            <div class="sponsor-name">VelocityStream</div>
+            <div class="sponsor-type">MEDIA PARTNER</div>
+            <div class="sponsor-description">Global streaming platform bringing Team Calcide content to fans around the world.</div>
+          </div>
+        </div>
+        
+        <h2>Become a Partner</h2>
+        <p>Team Calcide offers unique partnership opportunities for forward-thinking brands looking to associate with the cutting edge of motorsport technology. Our tailored sponsorship packages offer brand exposure to millions of fans worldwide, alongside access to our technological expertise and global network.</p>
+        <p>For partnership inquiries, please contact our sponsorship team at partnerships@teamcalcide.com.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation between sections
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active');
+    }
+  
+    const startButton = document.getElementById('startButton');
+    const launchButton = document.getElementById('launchButton');
+    const resultDisplay = document.getElementById('result');
+    const car = document.getElementById('car');
+    const lights = [
+      document.getElementById('light1'),
+      document.getElementById('light2'),
+      document.getElementById('light3'),
+      document.getElementById('light4'),
+      document.getElementById('light5')
+    ];
+    
+    const bestTimeDisplay = document.getElementById('bestTime');
+    const avgTimeDisplay = document.getElementById('avgTime');
+    const lastTimesDisplay = document.getElementById('lastTimes');
+    
+    let lightsOutTime = 0;
+    let reactionTimes = [];
+    let sequence = null;
+    let lightInterval = null;
+    let isReady = false;
+    let isRacing = false;
+    
+    startButton.addEventListener('click', startSequence);
+    launchButton.addEventListener('click', launch);
+    
+    function startSequence() {
+      resultDisplay.style.visibility = 'hidden';
+      resultDisplay.classList.remove('false-start');
+      car.classList.remove('launched');
+      
+      startButton.disabled = true;
+      launchButton.disabled = false;
+      isRacing = true;
+      isReady = false;
+      
+      // Reset all lights
+      lights.forEach(light => light.classList.remove('red'));
+      
+      // Random delay before starting light sequence (0.8 to 1.5 seconds)
+      let initialDelay = 800 + Math.random() * 700;
+      
+      setTimeout(() => {
+        let lightCount = 0;
+        
+        // Turn on lights one by one
+        lightInterval = setInterval(() => {
+          if (lightCount < 5) {
+            lights[lightCount].classList.add('red');
+            lightCount++;
+          } else {
+            clearInterval(lightInterval);
+            
+            // Random delay before lights out (0.2 to 2 seconds)
+            let lightsOutDelay = 200 + Math.random() * 1800;
+            
+            setTimeout(() => {
+              // All lights out
+              lights.forEach(light => light.classList.remove('red'));
+              lightsOutTime = Date.now();
+              isReady = true;
+            }, lightsOutDelay);
+          }
+        }, 800); // 0.8 seconds between each light
+      }, initialDelay);
+    }
+    
+    function launch() {
+      if (!isRacing) return;
+      
+      isRacing = false;
+      let now = Date.now();
+      
+      if (!isReady) {
+        // False start
+        resultDisplay.textContent = 'FALSE START!';
+        resultDisplay.classList.add('false-start');
+        resultDisplay.style.visibility = 'visible';
+        
+        // Clear any pending light sequence
+        clearInterval(lightInterval);
+        lights.forEach(light => light.classList.remove('red'));
+        
+        startButton.disabled = false;
+        launchButton.disabled = true;
+        return;
+      }
+      
+      // Valid reaction time
+      let reactionTime = now - lightsOutTime;
+      reactionTimes.push(reactionTime);
+      
+      // Only keep the last 10 times
+      if (reactionTimes.length > 10) {
+        reactionTimes.shift();
+      }
+      
+      // Display reaction time
+      resultDisplay.textContent = `${reactionTime} ms`;
+      resultDisplay.style.visibility = 'visible';
+      resultDisplay.classList.remove('false-start');
+      
+      // Move the car
+      car.classList.add('launched');
+      
+      // Update stats
+      updateStats();
+      
+      // Reset after a delay
+      setTimeout(() => {
+        startButton.disabled = false;
+        launchButton.disabled = true;
+      }, 1500);
+    }
+    
+    function updateStats() {
+      // Best time
+      let best = Math.min(...reactionTimes);
+      bestTimeDisplay.textContent = `${best} ms`;
+      
+      // Average time (last 5)
+      let recentTimes = reactionTimes.slice(-5);
+      let avg = recentTimes.reduce((a, b) => a + b, 0) / recentTimes.length;
+      avgTimeDisplay.textContent = `${Math.round(avg)} ms`;
+      
+      // Last 5 times
+      lastTimesDisplay.textContent = recentTimes.map(t => `${t} ms`).join(', ');
+    }
+  </script>
+</body>
+</html>
