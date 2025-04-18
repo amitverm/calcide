@@ -36,9 +36,10 @@
     }
     
     .logo-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #3498db, #1abc9c);
+      width: 80px;
+      height: 80px;
+      background: url(images/calcide-logo.png);
+      background-size:contain;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -48,7 +49,7 @@
       overflow: hidden;
     }
     
-    .logo-icon:before {
+    /* .logo-icon:before {
       content: "C";
       font-size: 36px;
       font-weight: bold;
@@ -62,7 +63,7 @@
       height: 6px;
       background-color: rgba(255, 24, 1, 0.8);
       bottom: 0;
-    }
+    } */
     
     .logo-text {
       font-size: 32px;
@@ -216,7 +217,7 @@
     }
     
     .team-member {
-      width: 48%;
+      width: 45%;
       margin-bottom: 15px;
       background-color: #333;
       padding: 10px;
@@ -276,7 +277,7 @@
     }
     
     .sponsor {
-      width: 30%;
+      width: 60%;
       margin-bottom: 20px;
       background-color: #333;
       padding: 15px;
@@ -290,8 +291,8 @@
     }
     
     .sponsor-logo {
-      width: 80px;
-      height: 80px;
+      width: 300px;
+      height: 300px;
       background-color: #fff;
       border-radius: 50%;
       display: flex;
@@ -303,6 +304,8 @@
       position: relative;
       overflow: hidden;
     }
+
+    .sponsor-logo img{ max-width: 100%;}
     
     .sponsor-name {
       font-weight: bold;
@@ -327,7 +330,7 @@
     }
     
     .sponsor-logo.fuel {
-      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      background: linear-gradient(135deg, #000, #000);
       color: #fff;
     }
     
@@ -443,53 +446,52 @@
       
       <div class="team-section">
         <h2>About Us</h2>
-        <p>Team Calcide is a next-generation Formula 1 team focused on precision engineering and cutting-edge technology. Founded in 2023, we bring together the brightest minds in motorsport, aerodynamics, and computational design.</p>
-        <p>Our name "Calcide" represents our core philosophy: calculated decisions combined with rapid acceleration. We believe that success in F1 comes from the perfect balance of data-driven strategy and lightning-fast reflexes.</p>
-        <p>Based in Milton Keynes, UK, with technology centers in Maranello, Italy and Palo Alto, USA, our global team is united by one mission: pushing the boundaries of what's possible in motorsport.</p>
+        <p>We are "<strong>Calcide</strong>", a passionate team competing in the F1 in Schools challenge. United by our love for engineering and innovation, we work together to design, build, and race a miniature F1 car powered by compressed air.        </p>
+        <p>Each member brings unique strengths—from design and engineering to marketing and management—helping us grow as a team and tackle every challenge with creativity and determination. Calcide is more than just a team name—it represents our drive to learn, collaborate, and push boundaries.</p>
         
         <h2>Our Team</h2>
         <div class="team-members">
           <div class="team-member">
-            <h4>Elena Rodriguez</h4>
-            <p class="role">Team Principal</p>
-            <p>Former race engineer with 15 years of F1 experience. Elena leads our team with a perfect blend of technical knowledge and strategic vision.</p>
+            <h4>Atharv Singh Tripathi</h4>
+            <p class="role">Team Manager</p>
+            <!-- <p>Former race engineer with 15 years of F1 experience. Elena leads our team with a perfect blend of technical knowledge and strategic vision.</p> -->
           </div>
           
           <div class="team-member">
-            <h4>Marcus Chen</h4>
-            <p class="role">Lead Driver</p>
-            <p>Known for his surgical precision and remarkable consistency, Marcus has achieved 8 podium finishes in his career and holds the record for fastest reaction time at race starts.</p>
+            <h4>Adhira Aggarwal</h4>
+            <p class="role">Sponsorship Manager</p>
+            <!-- <p>Known for his surgical precision and remarkable consistency, Marcus has achieved 8 podium finishes in his career and holds the record for fastest reaction time at race starts.</p> -->
           </div>
           
           <div class="team-member">
-            <h4>Sofia Blackwell</h4>
-            <p class="role">Second Driver</p>
-            <p>Rising star with exceptional wet-weather driving skills. Sofia joined Team Calcide after an impressive junior career with multiple championship wins.</p>
+            <h4>Aarav Verma</h4>
+            <p class="role">Design and Manufacturing Engineer</p>
+            <!-- <p>Rising star with exceptional wet-weather driving skills. Sofia joined Team Calcide after an impressive junior career with multiple championship wins.</p> -->
           </div>
           
           <div class="team-member">
-            <h4>Dr. Arun Patel</h4>
-            <p class="role">Chief Technical Officer</p>
-            <p>Pioneering aerodynamicist whose computational fluid dynamics models have revolutionized F1 car design, focusing on the perfect balance of downforce and efficiency.</p>
+            <h4>Myra Chauhan</h4>
+            <p class="role">Graphic Designer</p>
+            <!-- <p>Pioneering aerodynamicist whose computational fluid dynamics models have revolutionized F1 car design, focusing on the perfect balance of downforce and efficiency.</p> -->
           </div>
           
           <div class="team-member">
-            <h4>Luisa Fernandez</h4>
-            <p class="role">Head of Strategy</p>
-            <p>Mathematical genius who develops our race algorithms and decision-making systems, ensuring split-second precision in our race strategy.</p>
+            <h4>Maulik Goyal</h4>
+            <p class="role">Resource Manager</p>
+            <!-- <p>Mathematical genius who develops our race algorithms and decision-making systems, ensuring split-second precision in our race strategy.</p> -->
           </div>
           
           <div class="team-member">
-            <h4>James Wilson</h4>
-            <p class="role">Chief Engineer</p>
-            <p>Mechanical engineering expert specializing in power unit optimization and energy recovery systems, helping us maximize performance while maintaining reliability.</p>
+            <h4>Tavishi Sirohi</h4>
+            <p class="role">Co-Design Engineer</p>
+            <!-- <p>Mechanical engineering expert specializing in power unit optimization and energy recovery systems, helping us maximize performance while maintaining reliability.</p> -->
           </div>
         </div>
         
-        <h2>Our Technology</h2>
+        <!-- <h2>Our Technology</h2>
         <p>At Calcide, we believe technology is the backbone of racing excellence. Our custom-built simulation systems allow drivers to practice reaction times identical to race conditions. This web-based reaction test is a simplified version of the tools our drivers use every day.</p>
         <p>Our proprietary "NeuralDrive" system analyzes thousands of race starts to predict optimal launch timing, giving our drivers the competitive edge when those five lights go out.</p>
-        <p>We're also pioneering sustainable racing technology with our "EcoBoost" energy recovery system that has set new standards for efficiency in F1.</p>
+        <p>We're also pioneering sustainable racing technology with our "EcoBoost" energy recovery system that has set new standards for efficiency in F1.</p> -->
       </div>
     </div>
     
@@ -498,46 +500,52 @@
       
       <div class="team-section">
         <h2>Partnerships for Success</h2>
-        <p>Team Calcide is proud to partner with industry-leading brands who share our commitment to innovation, precision, and sustainable performance. Our sponsors are integral to our success, providing not just financial support but technological expertise that drives us forward.</p>
+        <p>Team Calcide is proud to partner with leading brands who share our commitment to innovation, precision, and sustainable performance. Our sponsors are integral to our success.</p>
         
         <div class="tier-description">Our Title Sponsor represents the pinnacle of our partnership network.</div>
         
         <div class="sponsors-grid">
           <div class="sponsor">
-            <div class="sponsor-logo prime">QT</div>
-            <div class="sponsor-name">QuantumTech</div>
-            <div class="sponsor-type">TITLE SPONSOR</div>
-            <div class="sponsor-description">Global leader in quantum computing solutions, providing revolutionary data processing that powers our race simulations.</div>
+            <div class="sponsor-logo prime">
+              <img src="images/sponsor-sk.png" />
+            </div>
+            <div class="sponsor-name">SK Builders</div>
+            <!-- <div class="sponsor-type">TITLE SPONSOR</div> -->
+            <!-- <div class="sponsor-description">Global leader in quantum computing solutions, providing revolutionary data processing that powers our race simulations.</div> -->
           </div>
         </div>
         
-        <div class="tier-divider"><span>PLATINUM PARTNERS</span></div>
-        <div class="tier-description">Our Platinum Partners work closely with our technical team, integrating their technologies directly into our operations.</div>
+        <!-- <div class="tier-divider"><span>PLATINUM PARTNERS</span></div>
+        <div class="tier-description">Our Platinum Partners work closely with our technical team, integrating their technologies directly into our operations.</div> -->
         
         <div class="sponsors-grid">
           <div class="sponsor">
-            <div class="sponsor-logo tech">NX</div>
-            <div class="sponsor-name">NexusAI</div>
-            <div class="sponsor-type">AI PARTNER</div>
-            <div class="sponsor-description">Advanced machine learning systems that optimize our race strategy in real-time during every Grand Prix.</div>
+            <div class="sponsor-logo tech">
+              <img src="images/sponsor-electron.png" />
+            </div>
+            <div class="sponsor-name">Electron Technologies</div>
+            <!-- <div class="sponsor-type">AI PARTNER</div> -->
+            <!-- <div class="sponsor-description">Advanced machine learning systems that optimize our race strategy in real-time during every Grand Prix.</div> -->
           </div>
           
           <div class="sponsor">
-            <div class="sponsor-logo fuel">VR</div>
-            <div class="sponsor-name">VelocityRenewables</div>
-            <div class="sponsor-type">ENERGY PARTNER</div>
-            <div class="sponsor-description">Sustainable fuel solutions that maximize performance while reducing environmental impact.</div>
+            <div class="sponsor-logo fuel">
+              <img src="images/sponsor-sneakers.png" />
+            </div>
+            <div class="sponsor-name">Indian Sneaker Festival</div>
+            <!-- <div class="sponsor-type">ENERGY PARTNER</div> -->
+            <!-- <div class="sponsor-description">Sustainable fuel solutions that maximize performance while reducing environmental impact.</div> -->
           </div>
           
-          <div class="sponsor">
+          <!-- <div class="sponsor">
             <div class="sponsor-logo finance">GP</div>
             <div class="sponsor-name">GlobalPeakFinance</div>
             <div class="sponsor-type">FINANCIAL PARTNER</div>
             <div class="sponsor-description">Investment specialists who provide the strategic funding that fuels our technological development.</div>
           </div>
-        </div>
+        </div> -->
         
-        <div class="tier-divider"><span>GOLD SPONSORS</span></div>
+        <!-- <div class="tier-divider"><span>GOLD SPONSORS</span></div>
         <div class="tier-description">Gold level sponsors contribute essential components and services to our racing operation.</div>
         
         <div class="sponsors-grid">
@@ -565,7 +573,7 @@
         
         <h2>Become a Partner</h2>
         <p>Team Calcide offers unique partnership opportunities for forward-thinking brands looking to associate with the cutting edge of motorsport technology. Our tailored sponsorship packages offer brand exposure to millions of fans worldwide, alongside access to our technological expertise and global network.</p>
-        <p>For partnership inquiries, please contact our sponsorship team at partnerships@teamcalcide.com.</p>
+        <p>For partnership inquiries, please contact our sponsorship team at partnerships@teamcalcide.com.</p> -->
       </div>
     </div>
   </div>
